@@ -13,5 +13,5 @@ jobs:
       - run: |
          mkdir build
          cd build
-         cmake build ..
+         make ..
       - run: ctest ..
