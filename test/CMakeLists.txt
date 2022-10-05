@@ -3,6 +3,12 @@ project(safeshared_tests)
 
 set(CMAKE_CXX_STANDARD 17)
 
+# Enable pthreads
+if(UNIX)
+    set(THREADS_PREFER_PTHREAD_FLAG ON)
+    find_package(Threads REQUIRED)
+endif()
+
 # Download Catch2
 include(FetchContent)
 FetchContent_Declare(
@@ -18,6 +24,11 @@ add_executable(${PROJECT_NAME}
 target_link_libraries(${PROJECT_NAME} 
     PRIVATE 
         Catch2::Catch2WithMain)
+if(UNIX)
+    target_link_libraries(${PROJECT_NAME} 
+        PRIVATE 
+            Threads::Threads)
+endif()
 
 # Automatically discover tests
 include(CTest)

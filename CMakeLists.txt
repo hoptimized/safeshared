@@ -8,12 +8,6 @@ project(safeshared
 
 set(CMAKE_CXX_STANDARD 17)
 
-# Enable pthreads on UNIX
-if(UNIX)
-    set(THREADS_PREFER_PTHREAD_FLAG ON)
-    find_package(Threads REQUIRED)
-endif()
-
 if (CMAKE_SOURCE_DIR STREQUAL CMAKE_CURRENT_SOURCE_DIR)
     set(STANDALONE ON)
 else()
@@ -44,11 +38,6 @@ file(GLOB_RECURSE SOURCES
 # Target(`safeshared`): library to include with `add_subdirectory()`
 add_library(${PROJECT_NAME} INTERFACE ${SOURCES})
 target_include_directories(${PROJECT_NAME} INTERFACE ${CMAKE_CURRENT_SOURCE_DIR}/include)
-if(UNIX)
-    target_link_libraries(${PROJECT_NAME} 
-        PRIVATE 
-            Threads::Threads)
-endif()
 
 # Add tests, if needed
 if(BUILD_TESTS)
