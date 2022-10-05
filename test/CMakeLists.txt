@@ -3,7 +3,7 @@ project(safeshared_tests)
 
 set(CMAKE_CXX_STANDARD 17)
 
-# Enable pthreads
+# Enable pthreads on UNIX
 if(UNIX)
     set(THREADS_PREFER_PTHREAD_FLAG ON)
     find_package(Threads REQUIRED)
