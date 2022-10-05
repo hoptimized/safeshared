@@ -1,6 +1,13 @@
 cmake_minimum_required(VERSION 3.19)
 project(safeshared_tests)
+
 set(CMAKE_CXX_STANDARD 17)
+
+# Enable pthreads on UNIX
+if(UNIX)
+    set(THREADS_PREFER_PTHREAD_FLAG ON)
+    find_package(Threads REQUIRED)
+endif()
 
 # Download Catch2
 include(FetchContent)
@@ -16,7 +23,12 @@ add_executable(${PROJECT_NAME}
 	"rwlock_test.cpp")
 target_link_libraries(${PROJECT_NAME} 
     PRIVATE 
-    Catch2::Catch2WithMain)
+        Catch2::Catch2WithMain)
+if(UNIX)
+    target_link_libraries(${PROJECT_NAME} 
+        PRIVATE 
+            Threads::Threads)
+endif()
 
 # Automatically discover tests
 include(CTest)
