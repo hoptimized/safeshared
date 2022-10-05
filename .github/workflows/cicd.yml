@@ -1,0 +1,22 @@
+
+name: "CI/CD"
+on: [push]
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  CI:
+    runs-on: ubuntu-latest
+    steps:
+      - name: "Checkout repository"
+        uses: actions/checkout@v2
+      - name: "Build"
+        run: |
+         mkdir build
+         cd build
+         cmake ..
+         make
+      - name: "Run tests"
+        run: |
+          cd build
+          ctest --verbose
