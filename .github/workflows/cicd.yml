@@ -8,13 +8,15 @@ jobs:
   CI:
     runs-on: ubuntu-latest
     steps:
-      - name: "[SETUP] checkout repository"
+      - name: "Checkout repository"
         uses: actions/checkout@v2
-      - run: |
+      - name: "Build"
+        run: |
          mkdir build
          cd build
          cmake ..
          make
-      - run: |
+      - name: "Run tests"
+        run: |
           cd build
           ctest
