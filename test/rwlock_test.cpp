@@ -99,7 +99,8 @@ SCENARIO("Can only acquire one concurrent write lock")
             }
             AND_THEN("The second lockguard has not been acquired")
             {
-                REQUIRE(!lock2.has_value());
+                INFO("lock2.has_value() = " << lock2.has_value());
+                REQUIRE(!lock2.has_value()); // FAILS
             }
         }
     }
@@ -124,7 +125,8 @@ SCENARIO("Cannot acquire read lock when write lock exists")
             }
             AND_THEN("The read-lockguard has not been acquired")
             {
-                REQUIRE(!lock2.has_value());
+                INFO("lock2.has_value() = " << lock2.has_value());
+                REQUIRE(!lock2.has_value()); // FAILS
             }
         }
     }
