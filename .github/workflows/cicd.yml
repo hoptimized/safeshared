@@ -15,4 +15,6 @@ jobs:
          cd build
          cmake ..
          make
-      - run: ctest ..
+      - run: |
+          cd build
+          ctest
