@@ -3,7 +3,7 @@
 
 #include <catch2/catch_test_macros.hpp>
 
-#include <rwlock.h>
+#include <safeshared/rwlock.h>
 
 SCENARIO("RwLock can be initialized and accessed")
 {

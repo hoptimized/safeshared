@@ -18,9 +18,15 @@ FetchContent_Declare(
 )
 FetchContent_MakeAvailable(Catch2)
 
+# Files
+set(GLOBBING_EXPRESSION 
+    "${CMAKE_CURRENT_SOURCE_DIR}/**.cpp")
+file(GLOB_RECURSE SOURCES 
+    ${GLOBBING_EXPRESSION})
+
 # Target(`safeshared_tests`): executable tests
 add_executable(${PROJECT_NAME} 
-	"rwlock_test.cpp")
+	${SOURCES})
 target_link_libraries(${PROJECT_NAME} 
     PRIVATE 
         Catch2::Catch2WithMain)
